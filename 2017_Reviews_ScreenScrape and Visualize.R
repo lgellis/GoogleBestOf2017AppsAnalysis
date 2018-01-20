@@ -5,6 +5,7 @@ install.packages("ggplot2")
 install.packages("plotrix")
 install.packages("treemap")
 install.packages("plotly")
+install.packages("data.table")
 
 
 library(rvest)
@@ -14,6 +15,8 @@ library(ggplot2)
 library(plotrix)
 library(treemap)
 library(plotly)
+library(data.table)
+
 #source for scraping: https://www.analyticsvidhya.com/blog/2017/03/beginners-guide-on-web-scraping-in-r-using-rvest-with-hands-on-knowledge/
 
 ## Talk about screen scraping 
@@ -28,7 +31,7 @@ scrapeGoogleReviews <- function(url, categoryName ){
     app_title = html_text(html_nodes(webpage,'.id-app-title')),
     rating_count = html_text(html_nodes(webpage,'.rating-count')),
     download_count = html_text(html_nodes(webpage,'.download-count')),
-    content_rating = html_text(html_nodes(webpage,'.content-rating-title')),
+    # content_rating = html_text(html_nodes(webpage,'.content-rating-title')), #content_rating has since broken :(
     write_up = html_text(html_nodes(webpage,'.editorial-snippet')),
     category = categoryName)
   df
@@ -48,6 +51,11 @@ df8 <-scrapeGoogleReviews('https://play.google.com/store/apps/topic?id=campaign_
 
 fulldf <- rbind(df1,df2, df3, df4, df5, df6, df7, df8)
 fulldf
+
+#Note:  Screen scraping is incredibly fragile as web page structure can change at any time.
+# in case any of the screen scraping breaks due to website changes, import the data and keep going
+# uncomment the line below to just import the data from GH
+#fulldf <- fread('https://raw.githubusercontent.com/lgellis/GoogleBestOf2017AppsAnalysis/master/GoogleBestApps.csv')
 
 ###########  Extra formatting ################
 
