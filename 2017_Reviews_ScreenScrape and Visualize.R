@@ -53,9 +53,8 @@ fulldf <- rbind(df1,df2, df3, df4, df5, df6, df7, df8)
 fulldf
 
 #Note:  Screen scraping is incredibly fragile as web page structure can change at any time.
-# in case any of the screen scraping breaks due to website changes, import the data and keep going
-# uncomment the line below to just import the data from GH
-#fulldf <- fread('https://raw.githubusercontent.com/lgellis/GoogleBestOf2017AppsAnalysis/master/GoogleBestApps.csv')
+# to ensure that users can continue on with the full visualization, download the full dataset from GH
+fulldf <- fread('https://raw.githubusercontent.com/lgellis/GoogleBestOf2017AppsAnalysis/master/GoogleBestApps.csv')
 
 ###########  Extra formatting ################
 
